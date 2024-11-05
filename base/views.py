@@ -5,6 +5,10 @@ from .forms import NayaNote
 # Create your views here.
 
 def home(request):
+    context = {}
+    return render(request, 'home.html', context)
+
+def list(request):
     data = Note.objects.all()
     context = {'data': data}
     return render(request, 'index.html', context)
