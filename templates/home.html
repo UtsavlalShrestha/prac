@@ -8,7 +8,8 @@
 </head>
 <body>
     <h1>Welcome to Notes App</h1>
-    <a href="{% url 'create' %}"><input type="submit" value="Create New"></a>
+    <a href="{% url 'create_note' %}"><input type="submit" value="Create New Note"></a>
+    <a href="{% url 'choose_category' %}"><input type="submit" value="Create New Category"></a>
     <a href="{% url 'list' %}"><input type="submit" value="See Old List"></a>
 </body>
 </html>

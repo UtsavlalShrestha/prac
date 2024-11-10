@@ -14,30 +14,69 @@
 </head>
 <body>
 
-    <h2>Past notes</h2>
-    <table class="table">
+  <h2>Past notes</h2>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Note Category</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Note</button>
+    </li>
+
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Category</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
-        {% for x in data %}
-
+        {% for x in note_category %}
+    
         <tbody>
             <tr>
                 <td>{{ x.id }}</td>
                 <td>{{ x.name }}</td>
-                <td>{{ x.description }}</td>
-                <td>{{ x.category }}</td>
+                <td><a href="{% url 'edit_category' pk=x.id %}"><input type="submit" value="Edit" style="background-color: rgb(30, 144, 255) ; color: rgb(255, 255, 255);"></a></td>
             </tr>
         </tbody>
       {% endfor %}
-
+    
       </table>
-    <a href="{% url 'create' %}"><input type="submit" value="create new"></a>
+    <a href="{% url 'choose_category' %}"><input type="submit" value="create new"></a>
+
+    </div>
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"><table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      {% for x in data %}
+
+      <tbody>
+          <tr>
+              <td>{{ x.id }}</td>
+              <td>{{ x.name }}</td>
+              <td>{{ x.description }}</td>
+              <td>{{ x.category }}</td>
+              <td><a href="{% url 'edit_note' pk=x.id %}"><input type="submit" value="Edit" style="background-color: rgb(30, 144, 255) ; color: rgb(255, 255, 255);"></a></td>
+          </tr>
+      </tbody>
+    {% endfor %}
+
+    </table>
+    <a href="{% url 'create_note' %}"><input type="submit" value="create new"></a></div>
+  </div>
+    
+      
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
