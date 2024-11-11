@@ -40,11 +40,36 @@
             <tr>
                 <td>{{ x.id }}</td>
                 <td>{{ x.name }}</td>
-                <td><a href="{% url 'edit_category' pk=x.id %}"><input type="submit" value="Edit" style="background-color: rgb(30, 144, 255) ; color: rgb(255, 255, 255);"></a></td>
+                <td><a href="{% url 'edit_category' pk=x.id %}"><input type="submit" value="Edit" style="background-color: rgb(30, 144, 255) ; color: rgb(255, 255, 255);"></a> 
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ x.id }}">
+                    Delete
+                </button></td>
+
             </tr>
+            
         </tbody>
+        <div class="modal fade" id="deleteModal{{ x.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ x.id }}" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="deleteModalLabel{{ x.id }}">Confirm Delete</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      Are you sure you want to delete the category <strong>{{ x.name }}</strong>?
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <form method="POST" action="{% url 'delete_category' pk=x.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                  </div>
+              </div>
+          </div>
+      </div>
       {% endfor %}
-    
+
       </table>
     <a href="{% url 'choose_category' %}"><input type="submit" value="create new"></a>
 
@@ -67,9 +92,32 @@
               <td>{{ x.name }}</td>
               <td>{{ x.description }}</td>
               <td>{{ x.category }}</td>
-              <td><a href="{% url 'edit_note' pk=x.id %}"><input type="submit" value="Edit" style="background-color: rgb(30, 144, 255) ; color: rgb(255, 255, 255);"></a></td>
+              <td><a href="{% url 'edit_note' pk=x.id %}"><input type="submit" value="Edit" style="background-color: rgb(30, 144, 255) ; color: rgb(255, 255, 255);"></a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ x.id }}">
+                  Delete
+              </button></td></td>
           </tr>
       </tbody>
+      <div class="modal fade" id="deleteModal{{ x.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ x.id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel{{ x.id }}">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete the category <strong>{{ x.name }}</strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form method="POST" action="{% url 'delete_note' pk=x.id %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 
     </table>

@@ -1,16 +1,24 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Note, NoteCategory
-from .forms import NayaNote, NoteCategryForm
+from .forms import NayaNote, NoteCategryForm, UserForm
 # Create your views here.
+
+def register(request):
+    form  = UserForm()
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+    context = {'form': form}
+    return render(request, 'base/register.html', context)
+
 
 def home(request):
     context = {}
     return render(request, 'home.html', context)
 
 def list(request):
-    data = Note.objects.all()
-    note_category = NoteCategory.objects.all()
+    data = Note.objects.all().order_by('id')
+    note_category = NoteCategory.objects.all().order_by('id')
     context = {'data': data, 'note_category':note_category}
     return render(request, 'index.html', context)
 
@@ -66,4 +74,19 @@ def edit_note(request, pk):
         
     context = {'form': form}
     return render(request, 'base/edit_note.html', context)
+
+
+def delete_category(request, pk):
+    category_obj = NoteCategory.objects.get(id=pk)
+    if request.method == 'POST':
+        category_obj.delete()
+        return redirect('list')
+    return redirect('/')
+    
+def delete_note(request, pk):
+    note_obj = Note.objects.get(id=pk)
+    if request.method == 'POST':
+        note_obj.delete()
+        return redirect('list')
+    return redirect('/')
 
