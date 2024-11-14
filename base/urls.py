@@ -6,6 +6,8 @@ from .import views
 urlpatterns = [
     path('', views.home, name = "home"),
     path('register/', views.register, name = "register"),
+    path('login/', views.login_user, name = "login_user"),
+    path('logout/', views.logout_user, name = "logout_user"),
     path('list/', views.list, name = "list"),
     path('create/', views.create_note, name= "create_note"),
     path('choose_category/', views.choose_category, name= "choose_category"),

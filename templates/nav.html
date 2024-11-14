@@ -1,0 +1,9 @@
+
+<div class="hed">
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout_user' %}"><input type="submit" value="Logout"></a>
+    {% else %}
+        <a href="{% url 'login_user' %}"><input type="submit" value="Login"></a>
+        <a href="{% url 'register' %}"><input type="submit" value="Register"></a>
+    {% endif %}
+</div>

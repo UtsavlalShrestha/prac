@@ -6,7 +6,7 @@ from .models import Note, NoteCategory, User
 class NoteCategryForm(forms.ModelForm):
     class Meta:
         model = NoteCategory
-        fields = '__all__'
+        fields = ('name',)
         widgets ={
             'name': forms.TextInput(attrs={'class':"form-control"})
         }
@@ -27,4 +27,6 @@ class UserForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'class':"form-control"}),
             'password': forms.PasswordInput(attrs={'class':"form-control"}),
         }
+
+        
         
